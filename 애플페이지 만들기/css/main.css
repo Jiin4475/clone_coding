@@ -19,11 +19,13 @@
 
 .global-nav{
     height: 44px;
+    padding: 0 1rem;
 
 }
 .local-nav{
     height:52px ;
     border-bottom:1px solid #ddd ;
+    padding: 0 1rem;
 }
 .global-nav-links,
 .local-nav-links{
@@ -49,3 +51,42 @@
      /*a~c:not(a) a를 제외한 bc 에만 효과를 줌*/
     margin-left: 2em;
 }
+.scroll-section{
+    padding-top:50vh;/*브라우저창의 높이 절반 50 만큼*/
+}
+#scroll-section-0 h1{
+font-size: 4rem;
+text-align: center;
+}
+.main-message{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0 ;
+    height:3em;
+    font-size: 2.5rem;
+    
+}
+.main-message p{
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.2;
+}
+.description{
+    padding:0 1rem;
+    font-size: 1.2rem;
+    color: #888;
+}
+.description strong{
+    float: left;/*글씨를 감싸서 올라가는 형태*/
+    margin-right:0.2em ;
+    font-size: 3rem;
+    color: rgb(29, 29, 31);
+}
+
+
+/* 현재 html 14px로 지정함:
+폰트 사이즈-rem, 다른 사이즈는 -em 
+why? 현재 내 폰트사이즈의 비율을 활용할 수 있음
+e.g height: 3em, font-size: 2.5rem 이라면 
+height 는 2.5rem 의 3배 */
