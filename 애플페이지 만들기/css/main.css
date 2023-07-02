@@ -81,6 +81,8 @@ text-align: center;
     font-size: 3.5rem;
 }
 .description{
+    max-width: 1000px;
+    margin: 0 auto;
     padding:0 1rem;
     font-size: 1.2rem;
     color: #888;
@@ -103,6 +105,8 @@ text-align: center;
 }
 
 .mid-message{
+    max-width: 1000px;
+    margin: 0 auto;
     padding: 0 1rem;
     font-size: 2rem;
     color:#888 ;
@@ -112,6 +116,8 @@ text-align: center;
     color:rgb(29, 29, 31);
 }
 .canvas-caption{
+    max-width: 1000px;
+    margin: 0 auto;
     padding: 0 1rem;
     color:#888 ;
     font-size: 1.2rem;
@@ -124,8 +130,47 @@ text-align: center;
     background:darkorange;
     color: white;
 }
+
+/* 창 크기가 1024px 이상인 브라우저용 */
+ @media (min-width: 1024px){
+    #scroll-section-0 h1{
+        font-size: 9vw; 
+    }
+
+    .main-message {
+        font-size:4vw ;
+    }
+    .description{
+        font-size: 2rem;
+    }
+    .description strong{
+        font-size: 6rem;
+    }
+    #scroll-section-2. main-message{
+        font-size: 6vw;
+    }
+    .main-message small{
+        font-size: 1.5vw;
+    }
+    .desc-message{
+        width: 20%;
+    }
+    .mid-message{
+        font-size:4vw ;
+    }
+    .canvas-caption{
+       font-size: 2rem; 
+    }
+ }
+
+
 /* 현재 html 14px로 지정함:
 폰트 사이즈-rem, 다른 사이즈는 -em 
 why? 현재 내 폰트사이즈의 비율을 활용할 수 있음
 e.g height: 3em, font-size: 2.5rem 이라면 
 height 는 2.5rem 의 3배 */
+
+/* vw? or rem? 의도를 이해하기:
+rem 은 고정값 상대단위이긴하지만 html의 배
+그리고 vw 창크기의 몇 퍼센트인지
+=> 애플 웹사이트를 보면 메인 타이틀은 창크기에 따라 달라지기 때문에 -> VW  그러나 그 타이틀의 본문내용을 그렇게 영향을 받지 않기 때문에 고정값을 주거나 px 이나 rem 으로 줌*/
