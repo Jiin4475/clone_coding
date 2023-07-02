@@ -1,4 +1,4 @@
- @charset 'utf-8';
+@charset 'utf-8';
  html{
     font-weight: 'Noto Sans KR', sans-serif;
     font-size: 14px;
@@ -72,6 +72,14 @@ text-align: center;
     text-align: center;
     line-height: 1.2;
 }
+.main-message small{
+    display: block;
+    margin-bottom: 0.5em;
+    font-size: 1.2rem;
+}
+.scroll-section-2 .main-message{
+    font-size: 3.5rem;
+}
 .description{
     padding:0 1rem;
     font-size: 1.2rem;
@@ -83,8 +91,39 @@ text-align: center;
     font-size: 3rem;
     color: rgb(29, 29, 31);
 }
+.desc-message{
+    width: 50%;
+    font-weight: bold;
+    
+}
+.pin{
+    width: 1px;
+    height: 100px;
+    background:rgb(29, 29, 31);
+}
 
+.mid-message{
+    padding: 0 1rem;
+    font-size: 2rem;
+    color:#888 ;
 
+}
+.mid-message strong{
+    color:rgb(29, 29, 31);
+}
+.canvas-caption{
+    padding: 0 1rem;
+    color:#888 ;
+    font-size: 1.2rem;
+}
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 7rem;
+    background:darkorange;
+    color: white;
+}
 /* 현재 html 14px로 지정함:
 폰트 사이즈-rem, 다른 사이즈는 -em 
 why? 현재 내 폰트사이즈의 비율을 활용할 수 있음
