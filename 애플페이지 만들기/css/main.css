@@ -130,6 +130,22 @@ text-align: center;
     background:darkorange;
     color: white;
 }
+.sticky-elem{
+    /*스크롤 구간이 맞을 때만 보이기 위해사 display:none;*/
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+/*body에 붙이는 id */
+#show-scene-0 #scroll-section-0 .sticky-elem,
+#show-scene-1 #scroll-section-1 .sticky-elem,
+#show-scene-2 #scroll-section-2 .sticky-elem,
+#show-scene-3 #scroll-section-3 .sticky-elem {
+    display: block;
+}
 
 /* 창 크기가 1024px 이상인 브라우저용 */
  @media (min-width: 1024px){
@@ -139,7 +155,7 @@ text-align: center;
 
     .main-message {
         font-size:4vw ;
-    }
+    } 
     .description{
         font-size: 2rem;
     }
