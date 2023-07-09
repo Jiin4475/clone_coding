@@ -75,7 +75,7 @@
   
     currentScene--;
    }
-   console.log(currentScene);
+   document.body.setAttribute('id',`show-scene-${currentScene}`)
 
 }
 window.addEventListener('resize',setLayout);

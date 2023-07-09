@@ -147,7 +147,7 @@ text-align: center;
 }
 .sticky-elem{
     /*스크롤 구간이 맞을 때만 보이기 위해사 display:none;*/
-    display: none;
+    display: none;/*바디에 해당되는 씬이 나올 때만 보여짐*/
     position: fixed;
     top: 0;
     left: 0;
