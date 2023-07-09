@@ -68,23 +68,31 @@
    }
    if(yOffset > prevScrollHeight+ sceneInfo[currentScene].scrollHeight){
     currentScene++;
+    // document.body.setAttribute('id',`show-scene-${currentScene}`)
    }
    if(yOffset < prevScrollHeight){
     if(currentScene === 0) return;
     // 종종 다른 브라우저에서 스크롤 바운싱 될 때 마이너스로 취급 될 수 있기 때문에 그러면 에러가 발생 할 수 있음 그걸 방지하기 위해서  if(currentScene === 0) return; 주면 return 종료 
-  
     currentScene--;
+    // document.body.setAttribute('id',`show-scene-${currentScene}`)
    }
    document.body.setAttribute('id',`show-scene-${currentScene}`)
 
-}
-window.addEventListener('resize',setLayout);
- //윈도우창의 사이즈가 변할 때 add event 주고, setLayout 실행
+};
 window.addEventListener('scroll',() => {
     yOffset = window.pageYOffset;
-      scrollLoop();
+    scrollLoop();
 });
+//이름 그대로 DOM HTML 객체들이 로드만되면 시작(이미지X)
+//window.addEventListener('DOMContentLoaded',setLayout);
+//웹페이지 내용 이미지등이 싹 로딩된 후 시작
+window.addEventListener('load',setLayout);
+window.addEventListener('resize',setLayout);
+ //윈도우창의 사이즈가 변할 때 add event 주고, setLayout 실행
 
- 
- setLayout();//실행
+
+
+
+//  setLayout();//실행
+
 })();
