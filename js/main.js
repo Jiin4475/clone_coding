@@ -56,9 +56,22 @@
         sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
         sceneInfo[i].objs.container.style.height = `${ sceneInfo[i].scrollHeight}px`;
     }
+ 
+  yOffset = window.pageYOffset;
+    //current scene 자동으로  세팅
+    let totalScrollHeight = 0;
+    for(let i =0 ;i <sceneInfo.length; i++){
+        totalScrollHeight+= sceneInfo[i].scrollHeight;
+        if (totalScrollHeight >= yOffset) {
+            currentScene = i;
+            break;
+        }
+    }
+    document.body.setAttribute('id',`show-scene-${currentScene}`)
     
  }
 
+ 
 
  function scrollLoop(){
     prevScrollHeight= 0;//값이 누적이 되지 않게 0
@@ -68,18 +81,17 @@
    }
    if(yOffset > prevScrollHeight+ sceneInfo[currentScene].scrollHeight){
     currentScene++;
-    // document.body.setAttribute('id',`show-scene-${currentScene}`)
+    document.body.setAttribute('id',`show-scene-${currentScene}`)
    }
    if(yOffset < prevScrollHeight){
     if(currentScene === 0) return;
     // 종종 다른 브라우저에서 스크롤 바운싱 될 때 마이너스로 취급 될 수 있기 때문에 그러면 에러가 발생 할 수 있음 그걸 방지하기 위해서  if(currentScene === 0) return; 주면 return 종료 
     currentScene--;
-    // document.body.setAttribute('id',`show-scene-${currentScene}`)
+    document.body.setAttribute('id',`show-scene-${currentScene}`)
    }
-   document.body.setAttribute('id',`show-scene-${currentScene}`)
 
 };
-window.addEventListener('scroll',() => {
+    window.addEventListener('scroll',() => {
     yOffset = window.pageYOffset;
     scrollLoop();
 });
@@ -89,8 +101,6 @@ window.addEventListener('scroll',() => {
 window.addEventListener('load',setLayout);
 window.addEventListener('resize',setLayout);
  //윈도우창의 사이즈가 변할 때 add event 주고, setLayout 실행
-
-
 
 
 //  setLayout();//실행
