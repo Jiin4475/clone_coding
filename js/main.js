@@ -13,10 +13,19 @@
     type:'sticky',
     heightNum: 5,// 브라우저 높이의 5배로 scrollHeight 셋팅
     scrollHeight:0,
-    objs:{//애니메이션에 연관된 스크롤섹션4개를 가져와서 쓰기위해,
-        container: document.querySelector('#scroll-section-0')
+    objs:{
+        //애니메이션에 연관된 스크롤섹션4개를 가져와서 쓰기위해,
+        container: document.querySelector('#scroll-section-0'),
+        messageA: document.querySelector('#scroll-section-0.main-message.a'),
+        messageB: document.querySelector('#scroll-section-0.main-message.b'),
+        messageC: document.querySelector('#scroll-section-0.main-message.c'),
+        messageD: document.querySelector('#scroll-section-0.main-message.d'),
 
-    }
+         },
+         values: {
+            messageA_opacity:[0,1]
+
+         }
     },
      {
         //1
@@ -71,7 +80,23 @@
     
  }
 
- 
+ function playAnimation(){
+     switch (currentScene){
+        case 0 :
+            // console.log('0 play');
+            break;
+        case 1 :
+            //console.log('1 play');
+            break;
+        case 2 :
+            //console.log('2 play');
+            break;
+        case 3 :
+            //console.log('3 play');
+            break;
+     }
+
+ }
 
  function scrollLoop(){
     prevScrollHeight= 0;//값이 누적이 되지 않게 0
@@ -87,8 +112,10 @@
     if(currentScene === 0) return;
     // 종종 다른 브라우저에서 스크롤 바운싱 될 때 마이너스로 취급 될 수 있기 때문에 그러면 에러가 발생 할 수 있음 그걸 방지하기 위해서  if(currentScene === 0) return; 주면 return 종료 
     currentScene--;
-    document.body.setAttribute('id',`show-scene-${currentScene}`)
+    document.body.Attribute('id',`show-scene-${currentScene}`)
    }
+
+   playAnimation();
 
 };
     window.addEventListener('scroll',() => {

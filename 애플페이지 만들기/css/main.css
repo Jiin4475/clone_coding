@@ -162,6 +162,7 @@ text-align: center;
     display: block;
 }
 
+
 /* 창 크기가 1024px 이상인 브라우저용 */
  @media (min-width: 1024px){
     #scroll-section-0 h1{
