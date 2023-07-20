@@ -1,2 +1,2 @@
 # clone_coding_apple_website
-clone coding apple website만들기.202306~
+clone coding으로 학습한 것들 업로드 용 apple design 
