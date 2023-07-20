@@ -1,8 +1,11 @@
 // 전역변수를 피하기 위해,즉시 호출 함수 (function (){})
 //4개의 객체를 만듬 - 4개 구간으로 구성되어있어서
 //애니메이션 구간 설정 (scrollHeight)
-
 (()=> {
+     
+    let yOffset = 0; //window.pageYOffset 대신 쓸 변수
+
+
     const sceneInfo = [
      //4개 객체인 이유? 스크롤 섹션이 4개
       {  
@@ -52,8 +55,20 @@
   
     console.group(sceneInfo);
   }
+
+   function scrollLoop(){//몇 픽셀을 스크롤 했는지 그 수치를 가져오는 window.pageYOffset
+      console.log(yOffset);
+   }
+
   //윈도우의 창 사이즈가 변할 때 재 조정 
    window.addEventListener('resize', setLayout);
+
+   //몇번째 스크롤창에 있는지
+    window.addEventListener('scroll', ()=> {
+    yOffset = window.pageYOffset;//스크롤 함수 이후
+    scrollLoop();//스크롤하면 실행되는 함수
+
+   });
    setLayout();//실행
   
   }) ();
