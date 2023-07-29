@@ -66,7 +66,7 @@
     margin-left: 2em;
 }
 .scroll-section{
-    border: 3px solid red;
+    /* border: 3px solid red; 
     padding-top:50vh;/*브라우저창의 높이 절반 50 만큼*/
 }
 #scroll-section-0 h1{
@@ -108,7 +108,7 @@ text-align: center;
     font-size: 3rem;
     color: rgb(29, 29, 31);
 }
-.desc-message{
+.desc-message {
     width: 50%;
     font-weight: bold;
     
@@ -146,7 +146,7 @@ text-align: center;
     color: white;
 }
 .sticky-elem{
-    /*스크롤 구간이 맞을 때만 보이기 위해사 display:none;*/
+    /*스크롤 구간이 맞을 때만 보이기 위해서 display:none;*/
     display: none;/*바디에 해당되는 씬이 나올 때만 보여짐*/
     position: fixed;
     top: 0;

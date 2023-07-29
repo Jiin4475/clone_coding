@@ -1,74 +1,90 @@
-// 전역변수를 피하기 위해,즉시 호출 함수 (function (){})
-//4개의 객체를 만듬 - 4개 구간으로 구성되어있어서
-//애니메이션 구간 설정 (scrollHeight)
-(()=> {
-     
-    let yOffset = 0; //window.pageYOffset 대신 쓸 변수
+(() => {
+    
+let yOffset = 0;//window.pageYOffset 대신 쓸 변수
+let prevScrollHeight = 0;//현재 스크롤 위치( yOffset) 보다 이전에 위치한 스크롤 섹션들의 스크롤 높이 값의 합
+let currentScene = 0;//현재 활성화된 (눈 앞에 보고 있는) 씬(scroll-section)
 
 
-    const sceneInfo = [
-     //4개 객체인 이유? 스크롤 섹션이 4개
-      {  
-         //각 구간의 스크롤 높이, 집적 값을 넣지 않는 이유는 여러 기기에 접급 할 수 있기 때문에 고정값을 주지 않음
-         // 0
-         type:'sticky',
-         heightNum:5,//브라우저 높이의 5배로 scrollHeigh 셋팅
-         scrollHeigh :0,
-         objs:{
-          container: document.querySelector('#scroll-section-0')
-         }
-      }, 
-      {   //1
-          type:'normal',
-          heightNum:5,
-          scrollHeigh :0,
-          objs:{// container는 각 섹션의 아이디로 미리 가져온것 
-              container: document.querySelector('#scroll-section-1')
-             }
-      },
-      {   //2
-          type:'sticky',
-          heightNum:5,
-          scrollHeigh :0,
-          objs:{
-              container: document.querySelector('#scroll-section-2')
-             }
-      },
-      {   //3
-          type:'sticky',
-          heightNum:5,
-          scrollHeigh :0,
-          objs:{
-              container: document.querySelector('#scroll-section-3')
-             }
-      }
-    ];
-  
-    function setLayout(){
-      //각 스크롤 섹션의 높이 세팅 * window.innerHeight 브라우저창의 높이 곱하기
-    for (let i =0; i < sceneInfo.length; i++){
-      sceneInfo[i].scrollHeigh = sceneInfo[i].heightNum * window.innerHeight;
-      //위에서 받은  scrollHeigh 3450px을 objs 컨테이너,즉 실행되는 섹션의 아이디에 스크롤값을 주기위에 (각기 다른 섹션이기 때문에 ` %{변수}` 에 넣어줌)
-      sceneInfo[i].objs.container.style.height = `${ sceneInfo[i].scrollHeigh}px`;
-      //위의 결과로 스크롤바가 작아짐(sceneInfo[i].scrollHeigh 결과를 넣어서) => 컨텐츠의 길이가 길어졌다는것
+const sceneInfo = [
+    { // 0
+        type: 'sticky',
+        heightNum: 5,//브라우저 높이의 5배로 scrollheight 세팅
+        scrollHeight : 0 ,
+        objs:{
+            container: document.querySelector('#scroll-section-0')
+        }
+    },
+    { // 1
+        type: 'normal',
+        heightNum: 5,
+        scrollHeight : 0 ,
+        objs:{
+            container: document.querySelector('#scroll-section-1')
+        }
+    },
+    { // 2
+        type: 'sticky',
+        heightNum: 5,
+        scrollHeight : 0 ,
+        objs:{
+            container: document.querySelector('#scroll-section-2')
+        }
+    },
+    { // 3
+        type: 'sticky',
+        heightNum: 5,
+        scrollHeight : 0 ,
+        objs:{
+            container: document.querySelector('#scroll-section-3')
+        }
     }
-  
-    console.group(sceneInfo);
-  }
+];
 
-   function scrollLoop(){//몇 픽셀을 스크롤 했는지 그 수치를 가져오는 window.pageYOffset
-      console.log(yOffset);
-   }
+    function setLayout(){
+    // 각 스크롤 섹션의 높이
+     for (let i = 0; i < sceneInfo.length;  i++){
+         sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
+         sceneInfo[i].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
+     }
+     yOffset = window.pageYOffset; 
+     let totalScrollHeight = 0;
+     for (let i = 0; i < sceneInfo.length; i++) {
+        totalScrollHeight += sceneInfo[i].scrollHeight;
+        if (totalScrollHeight >= yOffset){
+            currentScene = i;
+            break;
 
-  //윈도우의 창 사이즈가 변할 때 재 조정 
-   window.addEventListener('resize', setLayout);
+        }
+     }
+     document.body.setAttribute('id',`show-scene-${currentScene}`);
+}
 
-   //몇번째 스크롤창에 있는지
-    window.addEventListener('scroll', ()=> {
-    yOffset = window.pageYOffset;//스크롤 함수 이후
-    scrollLoop();//스크롤하면 실행되는 함수
+    function scrollLoop(){//현재 눈 앞에 몇번 째 스크롤섹션이 스크롤중인지
+        prevScrollHeight = 0;// 스크롤 할 때마다 초기화가 안되어서 다 더해지는 일이 발생 하기 때문에 0으로 지정
+        for(let i = 0; i < currentScene; i++ ){
+            prevScrollHeight += sceneInfo[i].scrollHeight;
+        }
 
-   });
-   setLayout();//실행
-  
-  }) ();
+        if (yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
+            currentScene++;
+            document.body.setAttribute('id',`show-scene-${currentScene}`)
+        }
+        if (yOffset < prevScrollHeight){
+            if(currentScene === 0) return;//브라우저 바운스 효과로 인해 마이너스가 되는 것을 방지(모바일)
+            currentScene--;
+            document.body.setAttribute('id',`show-scene-${currentScene}`)
+
+        }
+   
+    };
+    
+    window.addEventListener('resize', setLayout);
+    window.addEventListener('scroll', () => {
+        yOffset = window.pageYOffset;
+        scrollLoop();
+    });
+    //window.addEventListener('DOMContentLoaded', setLayout);//DOM => html 구조만 로드되면 실행 
+    window.addEventListener('load', setLayout);
+    window.addEventListener('resize', setLayout);
+
+})(); 
