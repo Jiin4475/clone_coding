@@ -11,7 +11,18 @@ const sceneInfo = [
         heightNum: 5,//브라우저 높이의 5배로 scrollheight 세팅
         scrollHeight : 0 ,
         objs:{
-            container: document.querySelector('#scroll-section-0')
+            container: document.querySelector('#scroll-section-0'),
+            messageA: document.querySelector
+            ('#scroll-section-0 .main-messgae.a'),
+            messageB: document.querySelector
+            ('#scroll-section-0 .main-messgae.b'),
+            messageC: document.querySelector
+            ('#scroll-section-0 .main-messgae.c'),
+            messageD: document.querySelector
+            ('#scroll-section-0 .main-messgae.d'),
+        },
+        values:{
+            messageA_opacity: [0,1]
         }
     },
     { // 1
@@ -59,6 +70,30 @@ const sceneInfo = [
      document.body.setAttribute('id',`show-scene-${currentScene}`);
 }
 
+    // 첫번째 애니메이션 구간
+    function  playAnimation (){
+    switch (currentScene) {
+        case 0:
+            console.log('0 play');
+            break;
+
+        case 1:
+            console.log('1 play');
+            break;
+        
+        case 2:
+            console.log('2 play');
+            break;
+            
+        case 3:
+            console.log('3 play');
+            break;
+            
+    }
+
+    };
+   
+
     function scrollLoop(){//현재 눈 앞에 몇번 째 스크롤섹션이 스크롤중인지
         prevScrollHeight = 0;// 스크롤 할 때마다 초기화가 안되어서 다 더해지는 일이 발생 하기 때문에 0으로 지정
         for(let i = 0; i < currentScene; i++ ){
@@ -75,6 +110,7 @@ const sceneInfo = [
             document.body.setAttribute('id',`show-scene-${currentScene}`)
 
         }
+        playAnimation();     
    
     };
     
