@@ -51,6 +51,7 @@ const sceneInfo = [
     }
 ];
 
+    
     function setLayout(){
     // 각 스크롤 섹션의 높이
      for (let i = 0; i < sceneInfo.length;  i++){
@@ -70,23 +71,35 @@ const sceneInfo = [
      document.body.setAttribute('id',`show-scene-${currentScene}`);
 }
 
-    // 첫번째 애니메이션 구간
+   //values => messageA_opacity: [0,1]
+   function calcValues(values, currentYOffset) {
+        
+   };
+
+    // 첫번째 애니메이션 구간 => 해당 구간에서만 애니메이션이 작동하는거 확인
     function  playAnimation (){
+        const objs = sceneInfo[currentScene].objs;
+        const values = sceneInfo[currentScene].values;
+        const currentYOffset = yOffset - prevScrollHeight;
+        console.log(currentScene,currentYOffset);
     switch (currentScene) {
         case 0:
-            console.log('0 play');
+            //console.log('0 play');
+            let messageA_opacity_0 = values.messageA_opacity[0];
+            let messageA_opacity_1 = values.messageA_opacity[1];
+            console.log(calcValues(values.messageA_opacity, currentYOffset));
             break;
 
         case 1:
-            console.log('1 play');
+            //console.log('1 play');
             break;
         
         case 2:
-            console.log('2 play');
+            //console.log('2 play');
             break;
             
         case 3:
-            console.log('3 play');
+            // console.log('3 play');
             break;
             
     }
