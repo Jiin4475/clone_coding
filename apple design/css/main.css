@@ -66,7 +66,7 @@
     margin-left: 2em;
 }
 .scroll-section{
-    /* border: 3px solid red; 
+   
     padding-top:50vh;/*브라우저창의 높이 절반 50 만큼*/
 }
 #scroll-section-0 h1{
@@ -80,6 +80,7 @@ text-align: center;
     margin: 5px 0 ;
     height:3em;
     font-size: 2.5rem;
+    opacity:0 ;
     
 }
 .main-message p{
