@@ -60,10 +60,17 @@ const sceneInfo = [
     function setLayout(){
     // 각 스크롤 섹션의 높이
      for (let i = 0; i < sceneInfo.length;  i++){
-         sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
-         sceneInfo[i].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
-     }
+        if (sceneInfo[i].type === 'sticky') {
+            sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
+            
+        }else if (sceneInfo[i].type === 'normal') {
+           sceneInfo[i].scrollHeight = sceneInfo[i].objs.container.offsetHeight; // 컨테이너 양 만큼
+        }
+        sceneInfo[i].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
+     };
+
      yOffset = window.pageYOffset; 
+
      let totalScrollHeight = 0;
      for (let i = 0; i < sceneInfo.length; i++) {
         totalScrollHeight += sceneInfo[i].scrollHeight;
@@ -109,27 +116,21 @@ const sceneInfo = [
         const values = sceneInfo[currentScene].values;
         const currentYOffset = yOffset - prevScrollHeight;
         const scrollHeight =sceneInfo[currentScene].scrollHeight
-        const scrollRatio = (yOffset - prevScrollHeight) / scrollHeight;
+        const scrollRatio = currentYOffset / scrollHeight;
    
        
     switch (currentScene) {
         case 0: 
             //console.log('0 play');
-            const messageA_opacity_in = calcValues(values.messageA_opacity_in, currentYOffset);
-            const messageA_opacity_out = calcValues(values.messageA_opacity_out, currentYOffset);
-
-            const messageA_translateY_in = calcValues(values.messageA_translateY_in, currentYOffset);
-            const messageA_translateY_out = calcValues(values.messageA_translateY_out, currentYOffset);
-            
             
             if(scrollRatio <= 0.22 ) {
                 // in
-                objs.messageA.style.opacity = messageA_opacity_in;
-                objs.messageA.style.transform = `translateY(${messageA_translateY_in}%)`;
+                objs.messageA.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset);
+                objs.messageA.style.transform = `translateY(${calcValues(values.messageA_translateY_in, currentYOffset)}%)`;
             }else {
                 //out
-                objs.messageA.style.opacity = messageA_opacity_out;
-                objs.messageA.style.transform = `translateY(${messageA_translateY_out}%)`;
+                objs.messageA.style.opacity = calcValues(values.messageA_opacity_out, currentYOffset);
+                objs.messageA.style.transform = `translateY(${calcValues(values.messageA_translateY_out, currentYOffset)}%)`;
             }
             //스크롤 값에 맞게 투명=> 진해졌다가=>
             break;
